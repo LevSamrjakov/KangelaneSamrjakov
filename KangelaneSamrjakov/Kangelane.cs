@@ -5,17 +5,22 @@ using System.Text;
 namespace KangelaneSamrjakov
 {
     // Baasklass
-    public class Kangelane
+    public class Kangelane : IPaasta
     {
         // Isendiväljad (Privaatse Nähtavusega)
         private string PrivaatneNimi;
         private string PrivaatneAsukoht;
 
+        // MissiooniStaatus Enum
+        public MissiooniStaatusEnum MissiooniStaatus { get; set; }
+
         // Konstruktor
-        public Kangelane(string nimi, string asukoht)
+        public Kangelane(string nimi, string asukoht, MissiooniStaatusEnum missiooniStaatus)
         {
             PrivaatneNimi = nimi;
             PrivaatneAsukoht = asukoht;
+
+            MissiooniStaatus = missiooniStaatus;
         }
 
         // Omadused
@@ -52,29 +57,24 @@ namespace KangelaneSamrjakov
         }
 
         // Virtual meetodid
-        public virtual int Paasta(int ohus)
+
+        public virtual int Paasta(int ohus) // IPaasta liides meetod
         {
             return (int)Math.Round(ohus * 0.95);
         }
 
         public virtual string Vormiriietus()
         {
-            return "Kostüümi välimus";
+            return "Kostüümi Välimus";
         }
 
         public virtual string Tervitus()
         {
-            return "Tere kodanik";
+            return $"Tere kodanik!";
         }
-
-        public virtual string MissiooniStaatus()
-        {
-            return "Saadaval missioonide jaoks";
-        }
-
         public override string ToString()
         {
-            return $"Hero: {PrivaatneNimi}, Location: {PrivaatneAsukoht}";
+            return $"Hero: {Nimi}, Location: {Asukoht}";
         }
     }
 }

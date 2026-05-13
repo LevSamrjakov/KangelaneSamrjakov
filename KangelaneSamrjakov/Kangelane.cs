@@ -12,15 +12,15 @@ namespace KangelaneSamrjakov
         private string PrivaatneAsukoht;
 
         // MissiooniStaatus Enum
-        public MissiooniStaatusEnum MissiooniStaatus { get; set; }
+        public MissiooniStaatusEnum Staatus { get; set; }
 
         // Konstruktor
-        public Kangelane(string nimi, string asukoht, MissiooniStaatusEnum missiooniStaatus)
+        public Kangelane(string nimi, string asukoht, MissiooniStaatusEnum staatus)
         {
             PrivaatneNimi = nimi;
             PrivaatneAsukoht = asukoht;
 
-            MissiooniStaatus = missiooniStaatus;
+            Staatus = staatus;
         }
 
         // Omadused
@@ -58,20 +58,38 @@ namespace KangelaneSamrjakov
 
         // Virtual meetodid
 
+        // Paasta
         public virtual int Paasta(int ohus) // IPaasta liides meetod
         {
             return (int)Math.Round(ohus * 0.95);
         }
 
-        public virtual string Vormiriietus()
+        // Missiooni Staatus
+        public virtual string MissiooniStaatus()
         {
-            return "Kostüümi Välimus";
+            if (Staatus == MissiooniStaatusEnum.Saadaval)
+            {
+                return $"{Nimi} on hetkel saadaval.";
+            }
+            else
+            {
+                return $"{Nimi} on hetkel missioonil.";
+            }
         }
 
+        // Vormiriietus
+        public virtual string Vormiriietus()
+        {
+            return $"{Nimi} kannab tavalist kangelase vormi.";
+        }
+
+        // Tervitus
         public virtual string Tervitus()
         {
-            return $"Tere kodanik!";
+            return $"Tere kodanik! Mina olen {Nimi}.";
         }
+
+        // ToString
         public override string ToString()
         {
             return $"Hero: {Nimi}, Location: {Asukoht}";
